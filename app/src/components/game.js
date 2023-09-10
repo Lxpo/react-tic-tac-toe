@@ -31,7 +31,7 @@ export default function Game() {
         let description = '';
 
         if(move > 0) {
-            if(isAtCurrentMove() ) {
+            if(isAtCurrentMove()) {
                 description = `You are at move ${move + 1}`
             } else {
                 description = `Go to move #: ${move}`

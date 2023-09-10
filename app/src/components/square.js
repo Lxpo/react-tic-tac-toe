@@ -1,8 +1,8 @@
 export default function Square({value, onSquareClick}) {
-
+    
     return (
         <button 
-            className="square"
+            className={`square`}
             onClick={onSquareClick}
         >
             { value }

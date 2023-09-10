@@ -25,6 +25,7 @@ function calculateWinner(squares) {
 export function Board({xIsNext, squares, onPlay}) {
   
     function handleClick (i) {
+        console.log('Clicked Square: ', i);
     
         if (squares[i] || calculateWinner(squares)) {
             return;
@@ -50,11 +51,44 @@ export function Board({xIsNext, squares, onPlay}) {
     } else {
         status = "Next player: " + (xIsNext ? "X" : "O");
     }
+
+    let boardRows = [];
+
+    for(let i = 0; i < 3; i++) {
+        let row = [];
+        let squareNum = 0;   
+    
+        switch(i) {
+            case 1: 
+                squareNum = 3
+                break;
+            case 2: 
+                squareNum = 6
+                break;
+            default: 
+                squareNum = 0
+        }  
+
+        for(let s = 0; s < 3; s++) {
+            let currentSquare = squareNum
+            row.push(<Square value={squares[squareNum]} onSquareClick={() => handleClick(currentSquare)}/>)
+            
+            squareNum += 1;
+        }
+
+        // console.log(`row ${i}`, row);
+       
+        boardRows.push(
+            <div className="board-row" key={`row-${i}`}> 
+                {row}
+            </div>
+        )
+    }
     
     return (
         <>
             <div className="status">{status}</div>
-            <div className="board-row">
+            {/* <div className="board-row">
                 <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
                 <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
                 <Square value={squares[2]} onSquareClick={() => handleClick(2)}/>
@@ -68,7 +102,10 @@ export function Board({xIsNext, squares, onPlay}) {
                 <Square value={squares[6]} onSquareClick={() => handleClick(6)}/>
                 <Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
                 <Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
-            </div>
+            </div> */}
+            {
+                boardRows
+            }
         </>
     )
 }
